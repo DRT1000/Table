@@ -2,9 +2,15 @@ import Table from "./models/Table";
 import students from "./data";
 import "./sass/table.scss"
 
-const table = new Table(students, 4)
+let input = document.querySelector('input')
+const table = new Table(students, input.value)
 table.getTable()
-
+input.addEventListener('change', () => {
+    document.querySelector('#table').innerHTML = ''
+    document.querySelector('#head').innerHTML = ''
+    const table = new Table(students, input.value)
+    table.getTable()
+})
 
 const ageSort = document.querySelector('#sortByAge')
 ageSort.addEventListener('click', () => {
@@ -19,3 +25,5 @@ nameSort.addEventListener('click', () => {
     document.querySelector('#head').innerHTML = ''
     table.sortByName().getTable()
 })
+
+

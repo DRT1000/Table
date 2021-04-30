@@ -5,19 +5,19 @@
     <title>Table</title>
 </head>
 <body>
-<div class="container">
-    <div class="buttons">
-        <button id="sortByAge" class="btn">SortByAge</button>
-        <button id="sortByName" class="btn">SortByName</button>
-    </div>
+<div class="mainContainer">
     <div class="tableContainer" id="container">
         <div class="head">
-            <div>Name</div>
-            <div>Age</div>
+            <div id="sortByName" class="btn">Name</div>
+            <div id="sortByAge" class="btn">Age</div>
         </div>
         <div id='table' class="table"></div>
     </div>
     <h3 id="head" class="pages"></h3>
+    <div class="footer">
+        <h3>Page size</h3>
+        <input type="number" value="3" min="1" class="input">
+    </div>
 </div>
 
 </body>
