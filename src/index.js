@@ -3,6 +3,7 @@ import students from "./data";
 import "./sass/table.scss"
 
 let input = document.querySelector('input')
+
 const table = new Table(students, input.value)
 table.getTable()
 input.addEventListener('change', () => {

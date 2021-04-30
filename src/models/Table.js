@@ -6,6 +6,7 @@ export default class Table {
         this.maxPageSize = maxPageSize
         this.pagesQuantity = Math.ceil(arr.length / maxPageSize)
         this.firstPage = this.students.slice(0, maxPageSize)
+        this.keys = Object.keys(arr[0])
     }
 
     getTable() {
@@ -26,16 +27,20 @@ export default class Table {
                 }
             )
         }
+        console.log(this.keys)
+        let table = document.querySelector('#table')
 
         for (let i = 1; i < this.pagesQuantity + 1; i++) {
             if (this.currentPageNumber === i) {
                 let page = this.sortedArr.slice(this.firstPage.length * (i - 1), this.maxPageSize * i)
+                console.log(page)
                 document.querySelector('#table').innerHTML += page.map(s => `
                 <div class="info" id="info">
                     <div>${s.name}</div>
                     <div>${s.age}</div>
+                    <div>${s.test}</div>
                 </div>
-            `).join('');
+            `).join('')
                 break
             }
         }
