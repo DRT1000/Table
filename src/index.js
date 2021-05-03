@@ -7,24 +7,12 @@ let input = document.querySelector('input')
 const table = new Table(students, input.value)
 table.getTable()
 input.addEventListener('change', () => {
-    document.querySelector('#table').innerHTML = ''
-    document.querySelector('#head').innerHTML = ''
-    const table = new Table(students, input.value)
-    table.getTable()
+    document.querySelector('#info').innerHTML = ''
+    document.querySelector('#pagesContainer').innerHTML = ''
+    document.querySelector('#head').innerHTML = ""
+    const newTable = new Table(students, input.value)
+    newTable.getTable()
 })
 
-const ageSort = document.querySelector('#sortByAge')
-ageSort.addEventListener('click', () => {
-    document.querySelector('#table').innerHTML = ''
-    document.querySelector('#head').innerHTML = ''
-    table.sortByAge().getTable()
-})
-
-const nameSort = document.querySelector('#sortByName')
-nameSort.addEventListener('click', () => {
-    document.querySelector('#table').innerHTML = ''
-    document.querySelector('#head').innerHTML = ''
-    table.sortByName().getTable()
-})
 
 

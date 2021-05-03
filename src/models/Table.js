@@ -10,9 +10,22 @@ export default class Table {
     }
 
     getTable() {
+
+        document.querySelector('#head').innerHTML = ""
+        document.querySelector('#head').innerHTML += this.keys.map(k =>
+            `<div class="btn">${k}</div>`
+        ).join('')
+
+        let headButtons = document.getElementsByClassName('btn')
+        for (let btn of headButtons) {
+            btn.addEventListener('click', () => {
+                this.sort(btn.textContent).getTable()
+            })
+        }
+
         for (let i = 0; i < this.pagesQuantity; i++) {
-            document.querySelector('#table').innerHTML = ""
-            document.querySelector('#head').innerHTML +=
+            document.querySelector('#info').innerHTML = ""
+            document.querySelector('#pagesContainer').innerHTML +=
                 ` <ul class="pagination">
                 <li class="pages " id="pages">${i + 1}</li>
             </ul> `
@@ -22,39 +35,34 @@ export default class Table {
         for (let item of items) {
             item.addEventListener('click', () => {
                     this.currentPageNumber = +item.textContent
+                    document.querySelector('#pagesContainer').innerHTML = ""
                     document.querySelector('#head').innerHTML = ""
                     this.getTable()
                 }
             )
         }
-        console.log(this.keys)
-        let table = document.querySelector('#table')
 
         for (let i = 1; i < this.pagesQuantity + 1; i++) {
             if (this.currentPageNumber === i) {
                 let page = this.sortedArr.slice(this.firstPage.length * (i - 1), this.maxPageSize * i)
-                console.log(page)
-                document.querySelector('#table').innerHTML += page.map(s => `
-                <div class="info" id="info">
-                    <div>${s.name}</div>
-                    <div>${s.age}</div>
-                    <div>${s.test}</div>
-                </div>
-            `).join('')
+                document.querySelector('#info').innerHTML += page.map(s => {
+                    let res = `<div class="info">`
+                    for (let j = 0; j < this.keys.length; j++) {
+                        res += `<div>${s[this.keys[j]]}</div>`
+                    }
+                    res += '</div>'
+                    return res
+                }).join('')
                 break
             }
         }
     }
 
-    sortByName() {
+    sort(btn) {
+        document.querySelector('#pagesContainer').innerHTML = ""
         this.sortedArr = this.students.sort((a, b) => {
-            return a.name < b.name ? -1 : 1
+            return a[btn] < b[btn] ? -1 : 1
         })
-        return this
-    }
-
-    sortByAge() {
-        this.sortedArr = this.students.sort((a, b) => a.age - b.age)
         return this
     }
 }
